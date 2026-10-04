@@ -1,0 +1,408 @@
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl"
+       version="1.0"
+       class="in-text"
+       default-locale="en-US">
+
+  <info>
+    <title>International Journal of Minerals, Metallurgy and Materials</title>
+    <title-short>IJMMM</title-short>
+
+    <id>https://www.zotero.org/styles/ijmmm-exact-custom</id>
+    <link href="https://www.zotero.org/styles/ijmmm-exact-custom"
+          rel="self"/>
+
+    <summary>International Journal of Minerals, Metallurgy and Materials reference style.</summary>
+
+    <updated>2026-10-05T00:00:00+00:00</updated>
+
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+    <category field="science"/>
+
+    <rights license="https://creativecommons.org/licenses/by-sa/3.0/"/>
+  </info>
+
+  <!-- ========================================================= -->
+  <!-- TERMS                                                     -->
+  <!-- ========================================================= -->
+
+  <locale xml:lang="en">
+    <terms>
+
+      <term name="and">and</term>
+
+      <term name="page">
+        <single>p.</single>
+        <multiple>pp.</multiple>
+      </term>
+
+      <term name="page-range-delimiter">-</term>
+
+      <term name="editor">
+        <single>ed.</single>
+        <multiple>eds.</multiple>
+      </term>
+
+    </terms>
+  </locale>
+
+
+  <!-- ========================================================= -->
+  <!-- AUTHORS                                                   -->
+  <!-- ========================================================= -->
+
+  <macro name="author">
+    <names variable="author">
+
+      <name initialize-with="."
+            name-as-sort-order="never"
+            delimiter=", "
+            and="text"
+            delimiter-precedes-last="always"/>
+
+      <substitute>
+        <text variable="title"/>
+      </substitute>
+
+    </names>
+  </macro>
+
+
+  <!-- ========================================================= -->
+  <!-- EDITORS                                                   -->
+  <!-- ========================================================= -->
+
+  <macro name="editor">
+    <names variable="editor">
+
+      <name initialize-with="."
+            name-as-sort-order="never"
+            delimiter=", "
+            and="text"
+            delimiter-precedes-last="always"/>
+
+      <label prefix=", "
+             form="short"/>
+
+    </names>
+  </macro>
+
+
+  <!-- ========================================================= -->
+  <!-- YEAR                                                      -->
+  <!-- ========================================================= -->
+
+  <macro name="year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+
+
+  <!-- ========================================================= -->
+  <!-- JOURNAL                                                   -->
+  <!-- ========================================================= -->
+
+  <macro name="journal">
+    <text variable="container-title"
+          form="short"
+          font-style="italic"/>
+  </macro>
+
+
+  <!-- ========================================================= -->
+  <!-- PAGES                                                     -->
+  <!-- ========================================================= -->
+
+  <macro name="pages">
+    <choose>
+
+      <if variable="page">
+        <group delimiter=" ">
+          <label variable="page"
+                 form="short"/>
+          <text variable="page"/>
+        </group>
+      </if>
+
+    </choose>
+  </macro>
+
+
+  <!-- ========================================================= -->
+  <!-- PUBLISHER                                                 -->
+  <!-- ========================================================= -->
+
+  <macro name="publisher">
+    <group delimiter=", ">
+      <text variable="publisher"/>
+      <text variable="publisher-place"/>
+    </group>
+  </macro>
+
+
+  <!-- ========================================================= -->
+  <!-- CITATION                                                   -->
+  <!-- ========================================================= -->
+
+  <citation collapse="citation-number">
+
+    <layout prefix="[" suffix="]" delimiter=", ">
+
+      <text variable="citation-number"/>
+
+    </layout>
+
+  </citation>
+
+
+  <!-- ========================================================= -->
+  <!-- BIBLIOGRAPHY                                               -->
+  <!-- ========================================================= -->
+
+  <bibliography
+      second-field-align="flush"
+      entry-spacing="0"
+      line-spacing="1"
+      et-al-min="999"
+      et-al-use-first="999">
+
+    <layout suffix=".">
+
+      <!-- Reference number -->
+      <text variable="citation-number"
+            prefix="["
+            suffix="] "/>
+
+
+      <choose>
+
+
+        <!-- =================================================== -->
+        <!-- JOURNAL ARTICLE                                     -->
+        <!-- =================================================== -->
+
+        <if type="article-journal">
+
+          <text macro="author"
+                suffix=", "/>
+
+          <text variable="title"
+                suffix=", "/>
+
+          <text macro="journal"/>
+
+          <text variable="volume"
+                prefix=", "/>
+
+          <text macro="year"
+                prefix="("
+                suffix="), "/>
+
+          <text variable="issue"
+                prefix="No. "
+                suffix=", "/>
+
+          <text macro="pages"/>
+
+        </if>
+
+
+        <!-- =================================================== -->
+        <!-- BOOK                                                 -->
+        <!-- =================================================== -->
+
+        <else-if type="book">
+
+          <text macro="author"
+                suffix=", "/>
+
+          <text variable="title"
+                suffix=", "/>
+
+          <text variable="publisher"
+                suffix=", "/>
+
+          <text variable="publisher-place"
+                suffix=", "/>
+
+          <text macro="year"/>
+
+        </else-if>
+
+
+        <!-- =================================================== -->
+        <!-- CONFERENCE PAPER                                     -->
+        <!-- =================================================== -->
+
+        <else-if type="paper-conference">
+
+          <text macro="author"
+                suffix=", "/>
+
+          <text variable="title"
+                suffix=", "/>
+
+          <text value="[in] "
+                prefix=""
+                suffix=""/>
+
+          <!-- Proceedings / book title -->
+          <text variable="container-title"
+                suffix=", "/>
+
+          <!-- Editors, if present -->
+          <text macro="editor"
+                suffix=", "/>
+
+          <!-- Collection / proceedings title, if present -->
+          <text variable="collection-title"
+                suffix=", "/>
+
+          <!-- Location -->
+          <text variable="publisher-place"
+                suffix=", "/>
+
+          <text macro="year"
+                suffix=", "/>
+
+          <text macro="pages"/>
+
+        </else-if>
+
+
+        <!-- =================================================== -->
+        <!-- THESIS / DISSERTATION                                -->
+        <!-- =================================================== -->
+
+        <else-if type="thesis">
+
+          <text macro="author"
+                suffix=", "/>
+
+          <text variable="title"
+                suffix=" "/>
+
+          <text variable="genre"
+                prefix="["
+                suffix="], "/>
+
+          <text variable="publisher"
+                suffix=", "/>
+
+          <text variable="publisher-place"
+                suffix=", "/>
+
+          <text macro="year"/>
+
+          <text macro="pages"
+                prefix=", "/>
+
+        </else-if>
+
+
+        <!-- =================================================== -->
+        <!-- PATENT                                                -->
+        <!-- =================================================== -->
+
+        <else-if type="patent">
+
+          <text macro="author"
+                suffix=", "/>
+
+          <text variable="title"
+                suffix=", "/>
+
+          <text variable="authority"
+                suffix=", "/>
+
+          <text variable="number"
+                prefix="Appl. "
+                suffix=", "/>
+
+          <text macro="year"/>
+
+        </else-if>
+
+
+        <!-- =================================================== -->
+        <!-- REPORT                                                -->
+        <!-- =================================================== -->
+
+        <else-if type="report">
+
+          <text macro="author"
+                suffix=", "/>
+
+          <text variable="title"
+                suffix=", "/>
+
+          <text variable="genre"
+                suffix=", "/>
+
+          <text macro="publisher"
+                suffix=", "/>
+
+          <text macro="year"/>
+
+          <text macro="pages"
+                prefix=", "/>
+
+        </else-if>
+
+
+        <!-- =================================================== -->
+        <!-- WEB PAGE                                              -->
+        <!-- =================================================== -->
+
+        <else-if type="webpage">
+
+          <text macro="author"
+                suffix=", "/>
+
+          <text variable="title"
+                suffix=", "/>
+
+          <text variable="container-title"
+                font-style="italic"
+                suffix=", "/>
+
+          <text macro="year"
+                suffix=". "/>
+
+          <text variable="URL"
+                prefix="Available at: "/>
+
+        </else-if>
+
+
+        <!-- =================================================== -->
+        <!-- GENERIC FALLBACK                                     -->
+        <!-- =================================================== -->
+
+        <else>
+
+          <text macro="author"
+                suffix=", "/>
+
+          <text variable="title"
+                suffix=", "/>
+
+          <text variable="container-title"
+                font-style="italic"
+                suffix=", "/>
+
+          <text macro="year"/>
+
+        </else>
+
+      </choose>
+
+    </layout>
+
+  </bibliography>
+
+</style>
+```
